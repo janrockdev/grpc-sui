@@ -1,0 +1,52 @@
+[package]
+name = "grpc-sui"
+version = "0.1.0"
+authors = ["Jan Rock <rock@linux.com>"]
+description = "Rust gRPC backend application for interaction with SUI Move smart contract."
+license = "Apache-2.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sui-sdk = { git = "https://github.com/mystenlabs/sui", package = "sui-sdk"}
+sui-keys = { git = "https://github.com/mystenlabs/sui", package = "sui-keys"}
+shared-crypto = { git = "https://github.com/mystenlabs/sui", package = "shared-crypto"}
+sui-types = { git = "https://github.com/mystenlabs/sui", package = "sui-types"}
+
+anyhow = "1.0"
+bcs = "0.1.4"
+bson = "2.10.0"
+chrono = { version = "0.4.23", features = ["serde"] }
+env_logger = "0.11.3"
+fastcrypto = "0.1.7"
+futures = "0.3"
+log = "0.4.21"
+mongodb = { version = "2.8.1", features = ["bson-chrono-0_4"] }
+prost = "0.12.3"
+rand = "0.8.5"
+reqwest = { version = "0.12.2", features = ["json"] }
+serde = { version = "1.0.152", features = ["derive"] }
+serde_json = "1.0.64"
+serde_with_object_id = "0.1.0"
+sha2 = "0.10.8"
+tonic = "0.11"
+tonic-reflection = "0.11"
+tonic-web = "0.11"
+tokio = { version = "1.2", features = ["full"] }
+tower-http = "0.5.2"
+
+[build-dependencies]
+tonic-build = "0.11"
+
+[[bin]]
+name = "grpc_server"
+path = "src/server.rs"
+
+[[bin]]
+name = "grpc_client"
+path = "src/client/client.rs"
+
+[[bin]]
+name = "grpc_admin"
+path = "src/client/admin.rs"

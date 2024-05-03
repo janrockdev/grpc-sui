@@ -1,0 +1,9 @@
+# IDE specific
+/.idea
+/.vscode
+
+# Build specific
+.env
+
+# Rust specific
+/target

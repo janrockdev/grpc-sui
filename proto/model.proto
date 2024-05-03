@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package model;
+
+// Model section
+service Model {
+  rpc Store(ModelStoreRequest) returns (ModelStoreResponse);
+  rpc Validate(ModelValidateRequest) returns (ModelValidateResponse);
+  rpc Util(ModelUtilRequest) returns (ModelUtilResponse);
+  rpc Asset(ModelAssetRequest) returns (ModelAssetResponse);
+}
+message ModelStoreRequest {
+  string domain = 1;
+  string model = 2;
+  string payload = 3;
+}
+message ModelStoreResponse {
+  string state = 1;
+  uint64 duration = 2;
+}
+message ModelValidateRequest {
+  string domain = 1;
+  string model = 2;
+  string payload = 3;
+}
+message ModelValidateResponse {
+  string state = 1;
+  string payload = 2;
+  uint64 duration = 3;
+}
+message ModelUtilRequest {
+  string request = 1;
+}
+message ModelUtilResponse {
+  string payload = 1;
+  uint64 duration = 2;
+}
+message ModelAssetRequest {
+  string request = 1;
+}
+message ModelAssetResponse {
+  string payload = 1;
+  uint64 duration = 2;
+}
+
+// Admin section
+service Admin {
+  rpc GetRequestResult(GetResultRequest) returns (ResultResponse);
+}
+message GetResultRequest {}
+message ResultResponse {
+  uint64 count = 1;
+}
