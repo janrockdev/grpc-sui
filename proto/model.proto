@@ -36,7 +36,8 @@ message ModelUtilResponse {
   uint64 duration = 2;
 }
 message ModelAssetRequest {
-  string request = 1;
+  string collection = 1;
+  string filter = 2;
 }
 message ModelAssetResponse {
   string payload = 1;

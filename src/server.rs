@@ -42,13 +42,11 @@ impl Model for ModelService {
     ) -> Result<tonic::Response<proto::ModelAssetResponse>, tonic::Status> {
         self.increment_counter().await;
 
-        let start = Instant::now();
-
         let input = request.get_ref();
 
         info!("requested asset object from Atlas MongoDB: {:?}", input);
 
-        let res = match service_index::get_record((input.request).to_string()).await {
+        let res = match service_index::get_record(input).await {
             Ok(o) => o,
             Err(e) => {
                 return Err(tonic::Status::internal(format!(
@@ -59,8 +57,8 @@ impl Model for ModelService {
         };
 
         let response = proto::ModelAssetResponse {
-            payload: "1".to_string(),
-            duration: start.elapsed().as_millis() as u64,
+            payload: res.payload.to_string(),
+            duration: res.duration,
         };
 
         Ok(tonic::Response::new(response))
@@ -73,7 +71,7 @@ impl Model for ModelService {
         self.increment_counter().await;
         let start = Instant::now();
 
-        let input = request.get_ref();
+        let _input = request.get_ref();
 
         let response = proto::ModelStoreResponse {
             state: "1".to_string(),
@@ -90,7 +88,7 @@ impl Model for ModelService {
         self.increment_counter().await;
         let start = Instant::now();
 
-        let input = request.get_ref();
+        let _input = request.get_ref();
 
         let response = proto::ModelValidateResponse {
             state: "1".to_string(),
@@ -108,7 +106,7 @@ impl Model for ModelService {
         self.increment_counter().await;
         let start = Instant::now();
 
-        let input = request.get_ref();
+        let _input = request.get_ref();
 
         let response = proto::ModelUtilResponse {
             payload: "1".to_string(),
